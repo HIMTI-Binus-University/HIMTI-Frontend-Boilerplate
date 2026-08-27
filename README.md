@@ -151,7 +151,7 @@ component variants, and the shared class-name helper.
 
 ### Prerequisites
 
-- Node.js 18 or newer
+- Node.js 22 or newer
 - npm
 - Access to the project's API and authentication services, if applicable
 
@@ -178,6 +178,25 @@ VITE_APP_URL=<APPLICATION_URL>
 
 Only variables prefixed with `VITE_` are exposed to browser code. Never put
 secrets in frontend environment variables or commit `.env`.
+
+### Development with Docker
+
+Docker runs the Vite development server with source code mounted for automatic
+reloads. After creating `.env`, build and start the frontend:
+
+```bash
+docker compose up --build
+```
+
+Open `http://localhost:3000`. The API URL in `.env.example` points to the
+backend boilerplate at `http://localhost:8000`; run that repository's Compose
+setup separately when the frontend needs the local API.
+
+Stop the frontend with:
+
+```bash
+docker compose down
+```
 
 ### Development
 
@@ -233,6 +252,10 @@ npm test
 ```
 
 ## Using the API Layer
+
+The starter page's `src/api/health/queries.ts` is a working example of calling
+the backend through the shared API client and exposing request state through a
+TanStack Query hook.
 
 ### 1. Define Query Keys
 
